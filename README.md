@@ -42,3 +42,21 @@ Follow these steps to run the project locally:
    ```bash
    npm run dev
    ```
+
+## Running with Docker
+
+You can also run this application using Docker. To do so, follow these steps:
+
+1. Build the Docker image:
+
+   ```bash
+   docker build -t research-bot-app .
+   ```
+
+2. Run the Docker container:
+
+   ```bash
+   docker run -p 8080:8080 research-bot-app .
+   ```
+
+The application will be available at http://localhost:8080
