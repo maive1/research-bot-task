@@ -1,14 +1,23 @@
-import { Typography } from "@mui/material";
+import { Container, Paper } from "@mui/material";
+import { AppBar, ChatBox } from "./components";
 
 function App() {
   return (
-    <>
-      <div>
-        <Typography variant="h1" color="primary">
-          Research Bot
-        </Typography>
-      </div>
-    </>
+    <Container sx={{ display: "flex", justifyContent: "center", padding: 5 }}>
+      <Paper
+        sx={{
+          width: 700,
+          height: "100%",
+          minHeight: 500,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <AppBar />
+        <ChatBox />
+      </Paper>
+    </Container>
   );
 }
 
