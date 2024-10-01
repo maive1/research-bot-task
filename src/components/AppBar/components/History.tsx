@@ -9,11 +9,20 @@ import {
 } from "@mui/material";
 import { Notes } from "@mui/icons-material";
 
-interface ChatHistoryProps {
-  searches: Array<string>;
+export interface Search {
+  id: string;
+  title: string;
 }
 
-export const History: FC<ChatHistoryProps> = ({ searches }) => {
+interface ChatHistoryProps {
+  searches: Array<Search>;
+  handlePreviousSearch: (searchId: string) => void;
+}
+
+export const History: FC<ChatHistoryProps> = ({
+  searches,
+  handlePreviousSearch,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -23,6 +32,11 @@ export const History: FC<ChatHistoryProps> = ({ searches }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const onSelectionSearch = (searchId: string) => {
+    setAnchorEl(null);
+    handlePreviousSearch(searchId);
   };
   return (
     <>
@@ -74,16 +88,21 @@ export const History: FC<ChatHistoryProps> = ({ searches }) => {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
-        <Typography variant="h6" color="primary" sx={{ padding: 2 }}>
-          Recent
-        </Typography>
-        <Divider />
-        {searches.length > 0 &&
-          searches.map((option) => (
-            <MenuItem key={option} onClick={handleClose}>
-              {option}
-            </MenuItem>
-          ))}
+        {searches.length === 0 ? (
+          <MenuItem disabled>No recent searches</MenuItem>
+        ) : (
+          <>
+            <Typography variant="h6" color="primary" sx={{ padding: 2 }}>
+              Recent
+            </Typography>
+            <Divider />
+            {searches.map(({ id, title }) => (
+              <MenuItem key={id} onClick={() => onSelectionSearch(id)}>
+                {title}
+              </MenuItem>
+            ))}
+          </>
+        )}
       </Menu>
     </>
   );
