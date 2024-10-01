@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { Feed, MessageInput } from "./components";
 
 const ChatBox = () => {
   return (
@@ -7,11 +8,12 @@ const ChatBox = () => {
         flex: 1,
         overflow: "auto",
         height: "100vh",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Typography variant="h1" color="primary">
-        CHAT
-      </Typography>
+      <Feed />
+      <MessageInput />
     </Box>
   );
 };
