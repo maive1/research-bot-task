@@ -31,15 +31,18 @@ const getArticles = async (url: string): Promise<Array<Article>> => {
 };
 
 const sendMessage = async (message: string) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/sendmessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      body: JSON.stringify({ message: message }),
-    }),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_API_BASE_URL}/sendmessage`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        body: JSON.stringify({ message: message }),
+      }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
