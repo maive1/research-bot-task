@@ -12,7 +12,9 @@ import { useChatStore } from "../../store/chatStore";
 const ChatAppBar = () => {
   const { clearChatLogs } = useChatStore();
 
+  //TODO: Implement the logic to get the searches from the store
   const searches: Array<Search> = [];
+
   const handleOpenNewSearch = () => {
     clearChatLogs();
     //TODO: Implement the logic to open a new search with routing

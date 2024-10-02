@@ -49,7 +49,7 @@ const MessageInput: FC<MessageInputProps> = ({
             onChange={(e) => handleChange(e.target.value)}
             variant="outlined"
             fullWidth
-            placeholder="Message for article search help"
+            placeholder={isLoading ? "..." : "Message for article search help"}
             onKeyDown={handleKeyDown}
             sx={{
               flexGrow: 1,

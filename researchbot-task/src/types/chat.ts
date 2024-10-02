@@ -11,6 +11,7 @@ export interface ChatLog {
   title: string;
   user: Role;
   message: string;
+  articles?: Array<Article>;
 }
 
 export interface ChatResponse {

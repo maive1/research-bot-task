@@ -1,5 +1,5 @@
-import { Card, CardContent, Typography } from "@mui/material";
 import { FC } from "react";
+import { Card, CardContent, Typography } from "@mui/material";
 
 interface ResearchArticleInformationCardProps {
   title: string;

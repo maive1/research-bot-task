@@ -9,17 +9,18 @@ interface MessageProps {
 
 const Message: FC<MessageProps> = ({ content, role }) => {
   const theme = useTheme();
+
   return (
     <Card
       sx={{
         backgroundColor:
           role === "user" ? theme.palette.background.default : "#ffffff",
         borderRadius: 3,
-        marginBottom: 2,
+        m: 2,
       }}
     >
       <CardContent>
-        <Typography variant="body1">{content}</Typography>s
+        <Typography variant="body1">{content}</Typography>
       </CardContent>
     </Card>
   );
