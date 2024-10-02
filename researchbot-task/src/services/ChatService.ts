@@ -1,7 +1,5 @@
 import camelcaseKeys from "camelcase-keys";
-import { OpenAiSystemRole } from "../utils/prompt-system";
-import { Article } from "../types/articles";
-import { Message } from "../types/chat";
+import { Article, ResultsOpenAlex } from "../types/articles";
 
 const getArticles = async (url: string): Promise<Array<Article>> => {
   const response = await fetch(url);
@@ -16,28 +14,21 @@ const getArticles = async (url: string): Promise<Array<Article>> => {
     throw new Error("No articles found");
   }
 
-  const totalArticles = camelcaseKeys(results, { deep: true });
-  return totalArticles;
-};
+  const parseResult = camelcaseKeys(results, { deep: true });
 
-// const sendMessage = async (messages: Array<Message>) => {
-//   const response = await fetch(
-//     `${import.meta.env.VITE_OPENAI_API_URL}/v1/chat/completition`,
-//     {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-//       },
-//       body: JSON.stringify({
-//         model: "gpt-4o-mini",
-//         messages: [OpenAiSystemRole, ...messages],
-//         temperature: 0.5,
-//       }),
-//     }
-//   );
-//   return response.json();
-// };
+  const articles: Article[] = parseResult.map((result: ResultsOpenAlex) => ({
+    id: result?.id,
+    displayName: result?.displayName,
+    publicationYear: result?.publicationYear,
+    citedByCount: Number(result?.citedByCount),
+    externalId: result?.doi,
+    isOa: result?.primaryLocation?.isOa,
+    summary: result?.primaryLocation?.landingPageUrl,
+    authors: result?.authorships?.map((author) => author?.rawAuthorName) || [],
+  }));
+
+  return articles;
+};
 
 const sendMessage = async (message: string) => {
   const response = await fetch(`${import.meta.env.VITE_API_URL}/sendmessage`, {

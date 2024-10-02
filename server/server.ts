@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
-import { prompt2 } from "./prompt-system";
 import dotenv from "dotenv";
+import { prompt } from "./prompt-system";
 
 dotenv.config();
 
@@ -29,11 +29,12 @@ app.post("/sendmessage", async (req: express.Request, res: any) => {
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: prompt2 },
-        { role: "user", content: message },
+        { role: "system", content: prompt },
+        { role: "user", content: JSON.stringify(message) },
       ],
       temperature: 0.1,
     });
+
     return res.send(response.choices[0].message);
   } catch (error) {
     console.error(error);
