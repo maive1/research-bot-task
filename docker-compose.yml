@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: ./server
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./server/.env
+
+  client:
+    build:
+      context: ./researchbot-task
+    ports:
+      - "8080:80"

@@ -7,12 +7,19 @@ import {
 } from "@mui/material";
 import { FindInPage } from "@mui/icons-material";
 import { History, Search } from "./components/History";
+import { useChatStore } from "../../store/chatStore";
 
 const ChatAppBar = () => {
-  //TODO: Implement the custom hook useChatHistory to manage the chat history
+  const { clearChatLogs } = useChatStore();
+
   const searches: Array<Search> = [];
-  const handleOpenNewSearch = () => {};
-  const handlePreviousSearch = () => {};
+  const handleOpenNewSearch = () => {
+    clearChatLogs();
+    //TODO: Implement the logic to open a new search with routing
+  };
+  const handlePreviousSearch = () => {
+    //TODO: Implement the logic to open a previous search with routing
+  };
 
   return (
     <AppBar position="sticky" sx={{ backgroundColor: "#fff", top: 0 }}>

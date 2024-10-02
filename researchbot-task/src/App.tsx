@@ -3,7 +3,14 @@ import { AppBar, ChatBox } from "./components";
 
 function App() {
   return (
-    <Container sx={{ display: "flex", justifyContent: "center", padding: 5 }}>
+    <Container
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        padding: 5,
+        height: "100vh",
+      }}
+    >
       <Paper
         sx={{
           width: 700,

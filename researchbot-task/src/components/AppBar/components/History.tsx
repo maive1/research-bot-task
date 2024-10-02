@@ -98,7 +98,7 @@ export const History: FC<ChatHistoryProps> = ({
             <Divider />
             {searches.map(({ id, title }) => (
               <MenuItem key={id} onClick={() => onSelectionSearch(id)}>
-                {title}
+                {title.substring(0, 15)}
               </MenuItem>
             ))}
           </>

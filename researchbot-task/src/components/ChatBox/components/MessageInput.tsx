@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import { Send } from "@mui/icons-material";
 import {
   FormControl,
@@ -6,20 +7,29 @@ import {
   TextField,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
 
-const MessageInput = () => {
+interface MessageInputProps {
+  message: string;
+  handleChange: (message: string) => void;
+  onSumbit: (message: string) => void;
+  isLoading: boolean;
+}
+
+const MessageInput: FC<MessageInputProps> = ({
+  message,
+  handleChange,
+  onSumbit,
+  isLoading,
+}) => {
   const theme = useTheme();
-  const [message, setMessage] = useState<string>("");
 
   const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (message.trim() === "") return;
-    // TODO: Send message to the server
-    setMessage("");
+    onSumbit(message);
   };
-
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (isLoading || !message) return;
     if (e.key === "Enter") {
       e.preventDefault();
       handleSend(e as unknown as React.FormEvent<HTMLFormElement>);
@@ -36,7 +46,7 @@ const MessageInput = () => {
         >
           <TextField
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => handleChange(e.target.value)}
             variant="outlined"
             fullWidth
             placeholder="Message for article search help"
@@ -56,7 +66,12 @@ const MessageInput = () => {
               },
             }}
           />
-          <IconButton type="submit" color="primary" size="large">
+          <IconButton
+            type="submit"
+            color="primary"
+            size="large"
+            disabled={isLoading || !message}
+          >
             <Send />
           </IconButton>
         </FormControl>
