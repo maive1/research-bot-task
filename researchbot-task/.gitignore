@@ -12,9 +12,7 @@ dist
 dist-ssr
 dist-server
 *.local
-Dockerfile
-.dockerignore
-.git
+
 
 # Editor directories and files
 .vscode/*

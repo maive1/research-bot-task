@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   server:
     build:
@@ -14,3 +12,5 @@ services:
       context: ./researchbot-task
     ports:
       - "8080:80"
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://localhost:3000}

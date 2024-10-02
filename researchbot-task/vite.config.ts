@@ -6,7 +6,14 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    strictPort: true,
-    port: 8080,
+    proxy: {
+      "/sendmessage": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+    },
+    watch: {
+      usePolling: true,
+    },
   },
 });
