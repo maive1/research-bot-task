@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
 import dotenv from "dotenv";
-import { prompt } from "./prompt-system";
+import { prompt } from "../prompt-system";
 
 dotenv.config();
 
