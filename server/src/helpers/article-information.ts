@@ -3,9 +3,9 @@ import { z } from "zod";
 import pdfParse from "pdf-parse";
 
 interface Article {
-  id: string;
+  id?: string;
   title?: string;
-  authors?: Array<string>;
+  author?: Array<string>;
   publication_year?: number;
   cited_by_count?: number;
   is_oa?: boolean;
@@ -14,25 +14,18 @@ interface Article {
 }
 
 const OpenAlexResultSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   title: z.string().optional(),
   publication_year: z.number().optional(),
-  cited_by_count: z.number().or(z.string()).transform(Number),
-  doi: z.string().optional(),
-  primary_location: z
-    .object({
-      pdf_url: z.string().url().optional(),
-    })
-    .optional(),
+  cited_by_count: z.number(),
+  doi: z.string().nullable(),
+  primary_location: z.any(),
   authorships: z.array(
     z.object({
       raw_author_name: z.string(),
     })
   ),
-  open_access: z.object({
-    is_oa: z.boolean(),
-    oa_url: z.string().optional(),
-  }),
+  open_access: z.any(),
 });
 
 const OpenAlexResponseSchema = z.object({
@@ -59,7 +52,6 @@ export async function getArticles(url: string): Promise<Array<Article>> {
     const response = await axios.get(url);
 
     const parsedResponse = OpenAlexResponseSchema.parse(response.data);
-
     if (!parsedResponse.results) throw new Error("Not found");
 
     const articleInformation = parsedResponse.results.map(
@@ -68,10 +60,10 @@ export async function getArticles(url: string): Promise<Array<Article>> {
         title: result?.title,
         publication_year: result?.publication_year,
         cited_by_count: result?.cited_by_count,
-        is_oa: result?.open_access.is_oa,
+        is_oa: result?.open_access?.is_oa,
         pdf_url: result?.primary_location?.pdf_url,
         authors:
-          result?.authorships.map((author) => author?.raw_author_name) || [],
+          result?.authorships?.map((author) => author?.raw_author_name) || [],
       })
     );
 

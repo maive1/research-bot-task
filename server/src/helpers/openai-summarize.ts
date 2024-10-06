@@ -72,6 +72,7 @@ export class OpenAIUses {
           messages: [{ role: "system", content: prompt }],
           temperature: 0.0,
         });
+
       if (response.choices[0]?.finish_reason !== "stop") {
         throw new Error("Not enough information to summarize");
       }

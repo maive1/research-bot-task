@@ -1,23 +1,16 @@
-const researcherPrompt = `
-Use the following instructions:
-The user will provide you with the text to search for academic articles. 
-Your goal will be to build a URL from the message sent by the user:
-	- The base of the URL: https://api.openalex.org 
-    - The path name: /works?filter=
-    - Queries: 
-        - default.search: Text search across titles, abstracts, and full text of works
-		- publication_year: The year this work was published.
-		- cited_by_count: The number of citations to this work. These are the times that other works have cited this work
-		- is_oa: if this work is Open Access (OA)
-    - These are the only queries you should use. No other that is not defined.
-    - An example of request with "default.search" query is https://api.openalex.org/works?filter=default.search:artificial+intelligence 
-    - An example of request with "publication_year" is https://api.openalex.org/works?filter=publication_year:>2020,publication_year:<2024
+export const builtUrl = `
+  Constructs a URL for the OpenAlex API based on the following parameters provided by the user:
+        1.The base URL is https://api.openalex.org/works?filter=.
+        2.The first required parameter is default.search, which represents the topic or keyword. Search for keywords or phrases in the user's post as a topic or text (e.g. 'global warming', 'artificial intelligence', 'agriculture'). You should not ask for this parameter if it is already present in the post.
+        3.Additional parameters, such as publication_year, cited_by_count, and is_oa, are optional and should only be included if the user mentions them. Do not request them if they are not present.
+        4.The is_oa parameter should always be is_oa:true or is_oa:false, depending on whether it is open access or not, but only include it if the user provides it.
+        5.If the user does not mention a topic in his/her message, only then should you ask for it.
+        6.Generates and returns only the URL without additional explanations or confirmations.
+        7.Invokes the getArticles function definition with the URL generated 
+    For example, if the user wants to search for 'global warming' and limit the search to articles between 2011 and 2012, the final URL would be:
+    https://api.openalex.org/works?filter=default.search:global+warming,publication_year:>2011,publication_year:<2012
 
-Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous.
-	
-# Example of url with the prompt given by the user
-User: Give me articles about global warming that are between the years 2005 and 2010 and they are open source
-URL: "https://api.openalex.org/works?filter=default.search=global+warming,publication_year:>2005,publication_year:<2010,is_oa:true
+    Build the final URL following this structure to call a function definition
 `;
 
 const summarizationPrompt = `  

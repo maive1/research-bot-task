@@ -3,13 +3,13 @@ import { FunctionDefinition } from "openai/resources";
 export const getArticlesFunctionCallingStructure: FunctionDefinition = {
   name: "getArticles",
   strict: true,
-  description: "Fetch articles from OpenAlex using a generated URL.",
+  description: "Fetches articles from OpenAlex API using the generated URL",
   parameters: {
     type: "object",
     properties: {
       url: {
         type: "string",
-        description: "The URL to fetch articles from OpenAlex.",
+        description: "The URL to fetch articles from",
       },
     },
     required: ["url"],
