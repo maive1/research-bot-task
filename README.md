@@ -30,7 +30,7 @@ Follow these steps to run the project locally:
    ```bash
     cd server
     npm install
-    cd ../researchbot-task
+    cd ../client
     npm install
    ```
 3. Create a .env file in the client folder and add the following:
@@ -58,7 +58,7 @@ Follow these steps to run the project locally:
 6. Start the development server:
 
    ```bash
-   ts-node server.ts
+   ts-node index.ts
    ```
 
 ## Running with Docker Compose
