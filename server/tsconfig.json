@@ -1,11 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./",
+    "target": "esnext",
+    "esModuleInterop": true,
     "strict": true,
-    "esModuleInterop": true
+    "moduleResolution": "node",
+    "noEmit": true,
+
+    "outDir": "dist",
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "typeRoots": ["./node_modules/@types", ".src/types"]
   },
-  "include": ["*.ts", "src/server.ts"]
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

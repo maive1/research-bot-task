@@ -1,13 +1,13 @@
+import { Role } from "@/lib/types";
 import { Card, CardContent, Typography, useTheme } from "@mui/material";
 import { FC } from "react";
-import { Role } from "../../../types/chat";
 
 interface MessageProps {
   role: Role;
-  content: string;
+  message: string;
 }
 
-const Message: FC<MessageProps> = ({ content, role }) => {
+const Message: FC<MessageProps> = ({ message, role }) => {
   const theme = useTheme();
 
   return (
@@ -20,7 +20,7 @@ const Message: FC<MessageProps> = ({ content, role }) => {
       }}
     >
       <CardContent>
-        <Typography variant="body1">{content}</Typography>
+        <Typography variant="body1">{message}</Typography>
       </CardContent>
     </Card>
   );

@@ -1,15 +1,23 @@
+import { Message } from "@/lib/types";
 import { create } from "zustand";
-import { ChatLog } from "../types/chat";
 
 interface ChatStoreProps {
-  chatLogs: Array<ChatLog>;
-  clearChatLogs: () => void;
-  saveChatLogs: (newMessage: ChatLog) => void;
+  chatIdSession: string | undefined;
+  currentConversation: Array<Message>;
+  clearChat: () => void;
+  saveMessage: (newMessage: Message) => void;
+  storeChatIdSession: (chatId: string) => void;
 }
 
 export const useChatStore = create<ChatStoreProps>((set) => ({
-  chatLogs: [],
-  clearChatLogs: () => set({ chatLogs: [] }),
-  saveChatLogs: (newMessage: ChatLog) =>
-    set((state) => ({ chatLogs: [...state.chatLogs, newMessage] })),
+  chatIdSession: undefined,
+  currentConversation: [],
+  clearChat: () =>
+    set(() => ({ currentConversation: [], chatIdSession: undefined })),
+  storeChatIdSession: (chatId: string) =>
+    set(() => ({ chatIdSession: chatId })),
+  saveMessage: (newMessage: Message) =>
+    set((state) => ({
+      currentConversation: [...state.currentConversation, newMessage],
+    })),
 }));

@@ -6,17 +6,17 @@ import {
   Tooltip,
 } from "@mui/material";
 import { FindInPage } from "@mui/icons-material";
-import { History, Search } from "./components/History";
+import { History, Search } from "./History";
 import { useChatStore } from "../../store/chatStore";
 
 const ChatAppBar = () => {
-  const { clearChatLogs } = useChatStore();
+  const { clearChat } = useChatStore();
 
   //TODO: Implement the logic to get the searches from the store
   const searches: Array<Search> = [];
 
   const handleOpenNewSearch = () => {
-    clearChatLogs();
+    clearChat();
     //TODO: Implement the logic to open a new search with routing
   };
   const handlePreviousSearch = () => {
