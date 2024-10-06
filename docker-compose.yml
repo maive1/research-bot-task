@@ -9,7 +9,7 @@ services:
 
   client:
     build:
-      context: ./researchbot-task
+      context: ./client
     ports:
       - "8080:80"
     environment:
