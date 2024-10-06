@@ -21,4 +21,4 @@ const summarizationPrompt = `
     - summary: one paragraph summary of the article
     - description: short description of the the article`;
 
-export { researcherPrompt, summarizationPrompt };
+export { summarizationPrompt };
