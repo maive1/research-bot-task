@@ -36,7 +36,6 @@ Follow these steps to run the project locally:
 3. Create a .env file in the client folder and add the following:
 
    ```bash
-   VITE_OPEN_ALEX_URL="https://api.openalex.org/works"
    VITE_API_BASE_URL=http://localhost:3000  //To modify the port you have to modify the variable in the docker file
    ```
 
